@@ -1,0 +1,35 @@
+# Projekt Applikation
+
+Dies ist eine Applikation im Rahmen des Projekts **PA25-Sascha**.
+
+## Übersicht
+
+Beschreiben Sie hier kurz den Zweck und die Hauptfunktionen der Applikation.
+
+## Installation
+
+1. Repository klonen:
+    ```
+    git clone <repository-url>
+    ```
+2. In das Projektverzeichnis wechseln:
+    ```
+    cd PA25-Sascha
+    ```
+3. Abhängigkeiten installieren (falls notwendig):
+    ```
+    # Beispiel für Node.js
+    npm install
+    ```
+
+## Nutzung
+
+Beschreiben Sie hier, wie die Applikation gestartet und verwendet wird.
+
+## Lizenz
+
+Dieses Projekt steht unter folgender Lizenz: [Lizenzname].
+
+## Autor
+
+- Sascha Jaeger
