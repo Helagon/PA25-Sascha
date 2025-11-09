@@ -1,0 +1,56 @@
+/* Base styles for mobile devices */
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles for Headings */
+h1 {
+    color: #4a772e;
+    font-size: 24px;
+}
+h2 {
+    color: #aa8f37;
+    font-size:22px;
+}
+h3 {
+    color: #d17b0f;
+    font-size:20px;
+}
+
+/* Styles for tablets */
+@media (min-width: 600px) {
+    body {
+        font-size: 18px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2 {
+        font-size:24px;
+    }
+    h3 {
+        font-size:22px;
+    }
+}
+
+/* Styles for desktops */
+@media (min-width: 1024px) {
+    body {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size:28px;
+    }
+    h3 {
+        font-size:24px;
+    }
+}
+
+
+
+

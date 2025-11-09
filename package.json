@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.mjs",
-    "dev": "node --watch index.mjs"
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/Helagon/PA25-Sascha#readme",
   "dependencies": {
+    "connect-livereload": "^0.6.1",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
+    "livereload": "^0.10.3",
+    "nodemon": "^3.1.10",
     "path": "^0.12.7",
     "url": "^0.11.4"
   }
