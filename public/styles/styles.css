@@ -2,21 +2,59 @@
 body {
     font-size: 16px;
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
 /* Styles for Headings */
 h1 {
     color: #4a772e;
     font-size: 24px;
+    font-weight: bold;
 }
 h2 {
-    color: #aa8f37;
+    color: #000000;
     font-size:22px;
+    font-weight: bold;
 }
 h3 {
-    color: #d17b0f;
+    color: #000000;
     font-size:20px;
+    font-weight: bold;
+}
+h4, h5, h6 {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Text */
+.text-sm{
+    font-size:14px;
+}
+.text-xs {
+    font-size:12px;
+}
+
+/* Buttons */
+.btn {
+    background-color: #4a772e;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Columns */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+[class^="col-"] {
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 /* Styles for tablets */
@@ -33,6 +71,12 @@ h3 {
     h3 {
         font-size:22px;
     }
+    h4, h5, h6 {
+        font-size:18px;
+    }
+    .text-sm{
+    font-size:16px;
+    }
 }
 
 /* Styles for desktops */
@@ -48,6 +92,73 @@ h3 {
     }
     h3 {
         font-size:24px;
+    }
+    h4, h5, h6 {
+        font-size:20px;
+    }
+    .text-sm{
+        font-size:18px;
+    }
+    
+    /* rows & columns */
+    .col-1 {
+        width: 8.33%;
+        display: inline-block;
+    }
+
+    .col-2 {
+        width: 16.66%;
+        display: inline-block;
+    }
+    
+    .col-3 {
+        width: 25%;
+        display: inline-block;
+    }
+    
+    .col-4 {
+        width: 33.33%;
+        display: inline-block;
+    }
+
+    .col-5 {
+        width: 41.66%;
+        display: inline-block;
+    }
+
+    .col-6 {
+        width: 50%;
+        display: inline-block;
+    }
+
+    .col-7 {
+        width: 58.33%;
+        display: inline-block;
+    }
+
+    .col-8 {
+        width: 66.66%;
+        display: inline-block;
+    }
+
+    .col-9 {
+        width: 75%;
+        display: inline-block;
+    }
+
+    .col-10 {
+        width: 83.33%;
+        display: inline-block;
+    }
+
+    .col-11 {
+        width: 91.66%;
+        display: inline-block;
+    }
+
+    .col-12 {
+        width: 100%;
+        display: inline-block;
     }
 }
 

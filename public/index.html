@@ -6,22 +6,34 @@
     <meta name="description" content="PA25 Sascha — Basic HTML starter" />
     <title>PA25 Sascha</title>
 
-    <!-- Optional: link to a stylesheet -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <header>
-        <h1>&#127828; Burgermeisterin&#127828;</h1>
+        <h1>&#127828;Burgermeisterin&#127828;</h1>
     </header>   
-    <main>
-        Ich bin der Nodemon Startet!
+    <main class="row">
+        <div class="col-7" id="burger">
+            <h4>Dein Burger:</h4>
+            <div id="burger-display">
+                <p class="text-sm">Wähle zuerst deine Zutaten aus!</p>
+            </div>
+            <button id="reset-btn" class="btn">Zurücksetzen</button>
+        </div>
+        <div class="col-5">
+            <h4>Zutaten auswählen:</h4>
+            <div id="ingredients-list">
+                <!-- Dynamische Zutatenliste -->
+            </div>
+        </div>
     </main>
     <footer>
-        <p>&copy; <span id="year"></span> PA25 Sascha</p>
+        <p class="text-xs">&copy; <span id="year"></span> PA25 Sascha</p>
     </footer>
 
     <script>
-        // small script to set the current year
+        // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
