@@ -34,6 +34,29 @@ h4, h5, h6 {
     font-size:12px;
 }
 
+/* Tabelle */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #1e3b20;
+    color:white;
+}
+
+.table .category-head{
+    background-color: #4a772e;
+    color: white;
+    font-weight: bold;
+}
+
 /* Buttons */
 .btn {
     background-color: #4a772e;
