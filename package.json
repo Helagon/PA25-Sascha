@@ -1,0 +1,30 @@
+{
+  "name": "pa25-sascha",
+  "version": "1.0.0",
+  "description": "Dies ist eine Applikation im Rahmen des Projekts **PA25-Sascha**.",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs",
+    "dev": "node --watch index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Helagon/PA25-Sascha.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Helagon/PA25-Sascha/issues"
+  },
+  "homepage": "https://github.com/Helagon/PA25-Sascha#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "url": "^0.11.4"
+  }
+}
