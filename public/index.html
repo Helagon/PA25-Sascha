@@ -8,6 +8,9 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- jQuery einbinden -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header>
@@ -22,9 +25,10 @@
             <button id="reset-btn" class="btn">Zurücksetzen</button>
         </div>
         <div class="col-5">
-            <h4>Zutaten auswählen:</h4>
+            <h3>Zutaten auswählen:</h3>
             <div id="ingredients-list">
                 <!-- Dynamische Zutatenliste -->
+                
             </div>
         </div>
     </main>
@@ -35,6 +39,50 @@
     <script>
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        $('#reset-btn').on('click', function() {
+            $('#burger-display').empty().append('<p class="text-sm">Wähle zuerst deine Zutaten aus!</p>');
+        }); 
+
+        // Funktion zum Hinzufügen einer Zutat zum Burger
+        function addIngredientToBurger(ingredient){
+            const burgerDisplay = document.getElementById('burger-display');
+
+            // Neues Element für die Zutat erstellen
+            const ingredientDiv = document.createElement('div');
+            ingredientDiv.className = 'burger-ingredient ' + ingredient.category;
+            ingredientDiv.textContent = ingredient.name;
+
+            // Zutat zum Burger-Display hinzufügen
+            burgerDisplay.appendChild(ingredientDiv);
+        }
+
+
+        // Zutaten laden und anzeigen
+        fetch('ingredients.json')
+            .then(response => response.json())
+            .then(data => {
+                const ingredientsList = document.getElementById('ingredients-list');
+
+                // Kategorien durchlaufen
+                for (const category in data) {
+                    const categoryDiv = document.createElement('div');
+                    const categoryTitle = document.createElement('h5');
+                    categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                    categoryDiv.appendChild(categoryTitle);
+
+                    data[category].forEach(ingredient => {
+                        const ingredientBtn = document.createElement('button');
+                        ingredientBtn.className = 'ingredient-btn btn ' + categoryTitle.textContent.toLowerCase();
+                        ingredientBtn.textContent = ingredient.name;
+                        ingredientBtn.onclick = () => addIngredientToBurger(ingredient);
+                        categoryDiv.appendChild(ingredientBtn);
+                    });
+
+                    ingredientsList.appendChild(categoryDiv);
+                }
+            })
+            .catch(error => console.error('Error loading ingredients:', error));
     </script>
 </body>
 </html>

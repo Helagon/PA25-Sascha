@@ -43,6 +43,59 @@ h4, h5, h6 {
     border-radius: 5px;
     cursor: pointer;
 }
+.btn:hover {
+    background-color: #3b5e23;
+}
+
+/* Zutaten-Buttons */ 
+.ingredient-btn {
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.patties {
+    background-color: #ac4343;
+}
+
+.patties:hover {
+    background-color: #8b3535;
+}
+
+.vegetables {
+    background-color: #4a772e;
+}
+
+.vegetables:hover {
+    background-color: #3b5e23;
+}
+
+.breads {
+    background-color: #d9a441;
+}
+
+.breads:hover {
+    background-color: #b78334;
+}
+
+.toppings {
+    background-color: #7a4aa3;
+}
+
+.toppings:hover {
+    background-color: #613880;
+}
+
+.sauces {
+    background-color: #d9744a;
+}
+
+.sauces:hover {
+    background-color: #b35f3a;
+}
 
 /* Columns */
 .row {
