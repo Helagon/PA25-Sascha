@@ -70,7 +70,9 @@ h4, h5, h6 {
     background-color: #3b5e23;
 }
 
-/* Zutaten-Buttons */ 
+
+
+/* Zutaten-Buttons  
 .ingredient-btn {
     color: #ffffff;
     padding: 5px 10px;
@@ -78,6 +80,17 @@ h4, h5, h6 {
     border-radius: 5px;
     cursor: pointer;
     margin: 2px;
+}*/
+
+.ingredient-panel{
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding:10px;
+    text-align: center;;
+    color:white;
 }
 
 .patties {
@@ -118,6 +131,16 @@ h4, h5, h6 {
 
 .sauces:hover {
     background-color: #b35f3a;
+}
+
+/* Burger Display */
+.burger-display {
+    border: 2px dashed #4a772e;
+    border-radius: 5px;
+    min-height: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
 }
 
 /* Columns */

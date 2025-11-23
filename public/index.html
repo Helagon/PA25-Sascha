@@ -19,8 +19,8 @@
     <main class="row">
         <div class="col-7" id="burger">
             <h4>Dein Burger:</h4>
-            <div id="burger-display">
-                <p class="text-sm">Wähle zuerst deine Zutaten aus!</p>
+                <div id="burger-display" class="burger-display dropZone">
+                <p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>
             </div>
             <button id="reset-btn" class="btn">Zurücksetzen</button>
 
@@ -50,7 +50,7 @@
         </div>
         <div class="col-5">
             <h3>Zutaten auswählen:</h3>
-            <div id="ingredients-list">
+            <div id="ingredients-list" class="row">
                 <!-- Dynamische Zutatenliste -->
                 
             </div>
@@ -64,23 +64,10 @@
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Reset-Button
         $('#reset-btn').on('click', function() {
             $('#burger-display').empty().append('<p class="text-sm">Wähle zuerst deine Zutaten aus!</p>');
         }); 
-
-        // Funktion zum Hinzufügen einer Zutat zum Burger
-        function addIngredientToBurger(ingredient){
-            const burgerDisplay = document.getElementById('burger-display');
-
-            // Neues Element für die Zutat erstellen
-            const ingredientDiv = document.createElement('div');
-            ingredientDiv.className = 'burger-ingredient ' + ingredient.category;
-            ingredientDiv.textContent = ingredient.name;
-
-            // Zutat zum Burger-Display hinzufügen
-            burgerDisplay.appendChild(ingredientDiv);
-        }
-
 
         // Zutaten laden und anzeigen
         fetch('ingredients.json')
@@ -91,22 +78,63 @@
                 // Kategorien durchlaufen
                 for (const category in data) {
                     const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'ingredient-category col-6';
                     const categoryTitle = document.createElement('h5');
                     categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
                     categoryDiv.appendChild(categoryTitle);
 
                     data[category].forEach(ingredient => {
-                        const ingredientBtn = document.createElement('button');
-                        ingredientBtn.className = 'ingredient-btn btn ' + categoryTitle.textContent.toLowerCase();
-                        ingredientBtn.textContent = ingredient.name;
-                        ingredientBtn.onclick = () => addIngredientToBurger(ingredient);
-                        categoryDiv.appendChild(ingredientBtn);
+                        const ingredientPanel = document.createElement('div');
+                        ingredientPanel.className = 'ingredient-panel dragElement ' + category;
+                        ingredientPanel.setAttribute('draggable', 'true');
+                        ingredientPanel.textContent = (ingredient.icon || '') + ingredient.name;
+                        categoryDiv.appendChild(ingredientPanel);             
                     });
 
                     ingredientsList.appendChild(categoryDiv);
                 }
+
+                // Drag-and-Drop Funktionalität initiliaiseren, sobald die Items aus JSON geladen sind
+                // https://dev.to/lensco825/making-a-simple-drag-and-drop-with-js-29l2 --> Vorlage
+                const dragItems = document.querySelectorAll('.dragElement');
+                const dropZone = document.querySelector('.dropZone');
+
+                if (dropZone) {
+                    dropZone.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                    });
+
+                    dropZone.addEventListener('dragenter', () => {
+                        dropZone.classList.add('hoverover');
+                    });
+
+                    dropZone.addEventListener('dragleave', () => {
+                        dropZone.classList.remove('hoverover');
+                    });
+
+                    dropZone.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        const dragging = document.querySelector('.dragging');
+                        if (dragging) {
+                            dropZone.appendChild(dragging);
+                            dragging.classList.remove('dragging');
+                            $("#empty").setAttribute("style","display:none");
+                        }
+                    });
+                }
+
+                dragItems.forEach(item => {
+                    item.addEventListener('dragstart', function() {
+                        this.classList.add('dragging');
+                    });
+
+                    item.addEventListener('dragend', function() {
+                        this.classList.remove('dragging');
+                    });
+                });
             })
             .catch(error => console.error('Error loading ingredients:', error));
+
     </script>
 </body>
 </html>

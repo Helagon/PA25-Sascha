@@ -4,36 +4,42 @@
             "name": "Rindfleisch-Pattie",
             "co2": 13.6,
             "water": 15400,
+            "icon": "🐄",
             "category": "patties"
         },
         {
             "name": "Schweinefleisch-Pattie",
             "co2": 4.6,
             "water": 6000,
+            "icon": "🐷",
             "category": "patties"
         },
         {
             "name": "Hühnchen-Pattie",
             "co2": 3.4,
             "water": 4325,
+            "icon": "🐔",
             "category": "patties"
         },
         {
             "name": "Hüttenkäse-Pattie",
             "co2": 3.4,
             "water": 4325,
+            "icon": "🧀",
             "category": "patties"
         },
         {
             "name": "Gemüse-Pattie",
             "co2": 3.4,
             "water": 4325,
+            "icon": "🫛",
             "category": "patties"
         },
         {
             "name": "Linsen-Pattie",
             "co2": 3.4,
             "water": 4325,
+            "icon": "🍲",
             "category": "patties"
         }
     ],
@@ -42,36 +48,42 @@
             "name": "Salatblatt",
             "co2": 2.7,
             "water": 2500,
+            "icon": "🥬",
             "category": "vegetables"
         },
         {
             "name": "Tomaten",
             "co2": 0.3,
             "water": 290,
+            "icon": "🍅",
             "category": "vegetables"
         },
         {
             "name": "Zwiebeln",
             "co2": 0.3,
             "water": 290,
+            "icon": "🧅",
             "category": "vegetables"
         },
         {
             "name": "Gurken",
             "co2": 0.3,
             "water": 290,
+            "icon": "🥒",
             "category": "vegetables"
         },
         {
             "name": "Essiggurken",
             "co2": 0.3,
             "water": 290,
+            "icon": "🥒",
             "category": "vegetables"
         },
         {
             "name": "Avocado",
             "co2": 0.3,
             "water": 290,
+            "icon": "🥑",
             "category": "vegetables"
         }
     ],
@@ -80,12 +92,14 @@
             "name": "Weizenbrötchen",
             "co2": 0.3,
             "water": 290,
+            "icon": "🍞",
             "category": "breads"
         },
         {
             "name": "Volkornbrötchen",
             "co2": 0.3,
             "water": 290,
+            "icon": "🥖",
             "category": "breads"
         }
     ],
@@ -94,30 +108,35 @@
             "name": "Schmelzkäse",
             "co2": 0.3,
             "water": 290,
+            "icon": "🧀",
             "category": "toppings"
         },
         {
             "name": "Speck",
             "co2": 0.3,
             "water": 290,
+            "icon": "🥓",
             "category": "toppings"
         },
         {
             "name": "Alpkäse",
             "co2": 0.3,
             "water": 290,
+            "icon": "🧀",
             "category": "toppings"
         },
         {
             "name": "Spiegelei",
             "co2": 0.3,
             "water": 290,
+            "icon": "🍳",
             "category": "toppings"
         },
         {
             "name": "Zwiebelringe",
             "co2": 0.3,
             "water": 290,
+            "icon": "🧅",
             "category": "toppings"
         }
     ],
@@ -126,24 +145,28 @@
             "name": "Ketchup",
             "co2": 0.3,
             "water": 290,
+            "icon": "",
             "category": "sauces"
         },
         {
             "name": "Mayonnaise",
             "co2": 0.3,
             "water": 290,
+            "icon": "",
             "category": "sauces"
         },
         {
             "name": "Senf",
             "co2": 0.3,
             "water": 290,
+            "icon": "",
             "category": "sauces"
         },
         {
             "name": "BBQ-Sauce",
             "co2": 0.3,
             "water": 290,
+            "icon": "",
             "category": "sauces"
         }
     ]
