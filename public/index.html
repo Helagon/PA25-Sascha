@@ -19,33 +19,33 @@
     <main class="row">
         <div class="col-7" id="burger">
             <h4>Dein Burger:</h4>
+                
                 <div id="burger-display" class="burger-display dropZone">
                 <p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>
-            </div>
+                </div>
             <button id="reset-btn" class="btn">Zurücksetzen</button>
 
             <h5>Umweltbelastung deines Burgers</h5>
             <table class="table">
+                <thead></thead>
                 <tr>
                     <th>Kategorie</th>
-                    <th>Wert</th>
+                    <th>Wasserverbrauch</th>
+                    <th>CO2-Verbrauch</th>
                 </tr>
-                <tr class="category-head">
-                    <td>CO2-Emissionen (Total)</td>
-                    <td id="co2-emissions">0 kg</td>
-                </tr>
-                <tr>
-                    <td>Rindfleisch-Pattie</td>
-                    <td id="co2-pattie">0 kg</td>
-                </tr>
-                <tr class="category-head">
-                    <td>Wasserverbrauch (Total)</td>
-                    <td id="water-usage">0 l</td>
-                </tr>
-                <tr>
-                    <td>Rindfleisch-Pattie</td>
-                    <td id="co2-pattie">0 kg</td>
-                </tr>
+                </thead>
+                <tbody id="ingredient-table">
+
+                </tbody>
+                <tfoot>
+                    <tr class="category-head">
+                        <td>Total</td>
+                        <td id="water-usage">0 l</td>
+                        <td id="co2-emissions">0 kg</td>
+                    </tr>
+                </tfoot>
+                
+              
             </table>
         </div>
         <div class="col-5">
@@ -64,31 +64,37 @@
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Reset-Button
-        $('#reset-btn').on('click', function() {
-            $('#burger-display').empty().append('<p class="text-sm">Wähle zuerst deine Zutaten aus!</p>');
-        }); 
-
         // Zutaten laden und anzeigen
         fetch('ingredients.json')
             .then(response => response.json())
             .then(data => {
                 const ingredientsList = document.getElementById('ingredients-list');
+                const currentTotalCO2 = 0;
+                const currentTotalWater = 0;
 
                 // Kategorien durchlaufen
                 for (const category in data) {
                     const categoryDiv = document.createElement('div');
                     categoryDiv.className = 'ingredient-category col-6';
                     const categoryTitle = document.createElement('h5');
+                    const categoryItems = document.createElement('div');
+                    categoryItems.className = category + "_category";
                     categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
                     categoryDiv.appendChild(categoryTitle);
 
+                    const categoryContent = Array();
+
+                    // Zutaten der Kategorie durchlaufen
                     data[category].forEach(ingredient => {
                         const ingredientPanel = document.createElement('div');
                         ingredientPanel.className = 'ingredient-panel dragElement ' + category;
                         ingredientPanel.setAttribute('draggable', 'true');
+                        ingredientPanel.setAttribute('data-co2', ingredient.co2);
+                        ingredientPanel.setAttribute('data-water', ingredient.water);
                         ingredientPanel.textContent = (ingredient.icon || '') + ingredient.name;
-                        categoryDiv.appendChild(ingredientPanel);             
+                        categoryDiv.appendChild(ingredientPanel);
+                        const item = Array(ingredient.name, ingredient.co2, ingredient.water, ingredient.icon, ingredient.category);    
+                        categoryContent.push(item);            
                     });
 
                     ingredientsList.appendChild(categoryDiv);
@@ -118,8 +124,19 @@
                         if (dragging) {
                             dropZone.appendChild(dragging);
                             dragging.classList.remove('dragging');
-                            $("#empty").setAttribute("style","display:none");
                         }
+                        $('#ingredient-table').append('<tr><td>' + dragging.textContent + '</td><td>' + dragging.getAttribute('data-water') + ' l</td><td>' + dragging.getAttribute('data-co2') + ' kg</td></tr>');
+                        const currentTotalCO2 = parseFloat(document.getElementById('co2-emissions').textContent) || 0;
+                        const currentTotalWater = parseFloat(document.getElementById('water-usage').textContent) || 0;
+                        const newValues = calculateCO2AndWater(
+                            dragging.textContent,
+                            parseFloat(dragging.getAttribute('data-co2')) || 0,
+                            parseFloat(dragging.getAttribute('data-water')) || 0,
+                            currentTotalCO2,
+                            currentTotalWater
+                        );
+
+                        
                     });
                 }
 
@@ -131,10 +148,50 @@
                     item.addEventListener('dragend', function() {
                         this.classList.remove('dragging');
                     });
+                    
                 });
+                
+                // Reset-Button
+                $('#reset-btn').on('click', function() {
+                    $('#burger-display').empty().append('<p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>');
+
+                    // CO2- und Wasserwerte zurücksetzen
+                    $('#co2-emissions').text('0 kg');
+                    $('#water-usage').text('0 l');
+
+                    // Liste zurück in Zutatenbereich verschieben
+                    dragItems.forEach(item => {
+                        const category = item.classList[2]; // Kategorie aus Klassenname extrahieren
+                        const categoryContainer = document.querySelector('.' + category + '_category');
+                        if (categoryContainer) {
+                            categoryContainer.appendChild(item);
+                        }
+                    });
+
+                    $('#ingredient-table').empty();
+                });
+
             })
             .catch(error => console.error('Error loading ingredients:', error));
+            
 
+            /*
+            Funktion zur Berechnung von CO2-Emissionen und Wasserverbrauch
+            */
+            function calculateCO2AndWater(ingredientName = '', ingredientCO2 = 0, ingredientWater = 0, currentTotalCO2 = 0, currentTotalWater = 0) {
+                // Berechnet neue Werte
+                const newTotalCO2 = currentTotalCO2 + ingredientCO2;
+                const newTotalWater = currentTotalWater + ingredientWater;
+
+                // Aktualisiere die Anzeige
+                document.getElementById('co2-emissions').textContent = newTotalCO2 + ' kg';
+                document.getElementById('water-usage').textContent = newTotalWater + ' l';
+
+                return {
+                    totalCO2: newTotalCO2,
+                    totalWater: newTotalWater
+                };
+            }
     </script>
 </body>
 </html>

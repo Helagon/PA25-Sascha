@@ -5,6 +5,15 @@ body {
     padding: 10px;
 }
 
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+
 /* Styles for Headings */
 h1 {
     color: #4a772e;
