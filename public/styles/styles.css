@@ -172,7 +172,7 @@ h4, h5, h6 {
 .col-11 { --desktop-span: 11; --tablet-span: 12;}
 .col-12 { --desktop-span: 12; --tablet-span: 12;}
 
-[class^="col-"] {
+[class*="col-"] {
     padding: 0 10px;
     box-sizing: border-box;
     margin-bottom: 20px;
@@ -202,7 +202,7 @@ h4, h5, h6 {
     }
 
      /* rows & columns */
-    [class^="col-"] {
+    [class*="col-"] {
         width: calc(100% / 12 * var(--tablet-span));
         display:inline-block;
     }
@@ -231,7 +231,7 @@ h4, h5, h6 {
     
     /* rows & columns */
 
-    [class^="col-"] {
+    [class*="col-"] {
         width: calc(100% / 12 * var(--desktop-span));
         display:inline-block;
     }
