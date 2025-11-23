@@ -158,12 +158,27 @@ h4, h5, h6 {
     flex-wrap: wrap;
     margin: 0 -10px;
 }
+/* Anzahl Spalten für unterschiedliche Desktop-Grössen definiert */
+.col-1 { --desktop-span: 1; --tablet-span: 4;}
+.col-2 { --desktop-span: 2; --tablet-span: 4;}
+.col-3 { --desktop-span: 3; --tablet-span: 4;}
+.col-4 { --desktop-span: 4; --tablet-span: 6;}
+.col-5 { --desktop-span: 5; --tablet-span: 6;}
+.col-6 { --desktop-span: 6; --tablet-span: 6;}
+.col-7 { --desktop-span: 7; --tablet-span: 8;}
+.col-8 { --desktop-span: 8; --tablet-span: 8;}
+.col-9 { --desktop-span: 9; --tablet-span: 8;}
+.col-10 { --desktop-span: 10; --tablet-span: 12;}
+.col-11 { --desktop-span: 11; --tablet-span: 12;}
+.col-12 { --desktop-span: 12; --tablet-span: 12;}
+
 [class^="col-"] {
     padding: 0 10px;
     box-sizing: border-box;
     margin-bottom: 20px;
     width: 100%;
 }
+
 
 /* Styles for tablets */
 @media (min-width: 600px) {
@@ -184,6 +199,12 @@ h4, h5, h6 {
     }
     .text-sm{
     font-size:16px;
+    }
+
+     /* rows & columns */
+    [class^="col-"] {
+        width: calc(100% / 12 * var(--tablet-span));
+        display:inline-block;
     }
 }
 
@@ -209,64 +230,10 @@ h4, h5, h6 {
     }
     
     /* rows & columns */
-    .col-1 {
-        width: 8.33%;
-        display: inline-block;
-    }
 
-    .col-2 {
-        width: 16.66%;
-        display: inline-block;
-    }
-    
-    .col-3 {
-        width: 25%;
-        display: inline-block;
-    }
-    
-    .col-4 {
-        width: 33.33%;
-        display: inline-block;
-    }
-
-    .col-5 {
-        width: 41.66%;
-        display: inline-block;
-    }
-
-    .col-6 {
-        width: 50%;
-        display: inline-block;
-    }
-
-    .col-7 {
-        width: 58.33%;
-        display: inline-block;
-    }
-
-    .col-8 {
-        width: 66.66%;
-        display: inline-block;
-    }
-
-    .col-9 {
-        width: 75%;
-        display: inline-block;
-    }
-
-    .col-10 {
-        width: 83.33%;
-        display: inline-block;
-    }
-
-    .col-11 {
-        width: 91.66%;
-        display: inline-block;
-    }
-
-    .col-12 {
-        width: 100%;
-        display: inline-block;
+    [class^="col-"] {
+        width: calc(100% / 12 * var(--desktop-span));
+        display:inline-block;
     }
 }
 
