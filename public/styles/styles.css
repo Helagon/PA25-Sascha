@@ -5,13 +5,8 @@ body {
     padding: 10px;
 }
 
-.hidden {
-    display: none;
-}
-
-.visible {
-    display: block;
-}
+.hidden { display: none; }
+.visible { display: block; }
 
 
 /* Styles for Headings */
@@ -36,12 +31,8 @@ h4, h5, h6 {
 }
 
 /* Text */
-.text-sm{
-    font-size:14px;
-}
-.text-xs {
-    font-size:12px;
-}
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
 
 /* Tabelle */
 .table {
@@ -102,44 +93,39 @@ h4, h5, h6 {
     color:white;
 }
 
+/* ingredient base + color modifiers */
+.ingredient-btn {
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px;
+    background-color: var(--btn-bg, #4a772e);
+}
+.ingredient-btn:hover {
+    background-color: var(--btn-hover-bg, #3b5e23);
+}
+
 .patties {
-    background-color: #ac4343;
+    --btn-bg: #ac4343;
+    --btn-hover-bg: #8b3535;
 }
-
-.patties:hover {
-    background-color: #8b3535;
-}
-
 .vegetables {
-    background-color: #4a772e;
+    --btn-bg: #4a772e;
+    --btn-hover-bg: #3b5e23;
 }
-
-.vegetables:hover {
-    background-color: #3b5e23;
-}
-
 .breads {
-    background-color: #d9a441;
+    --btn-bg: #d9a441;
+    --btn-hover-bg: #b78334;
 }
-
-.breads:hover {
-    background-color: #b78334;
-}
-
 .toppings {
-    background-color: #7a4aa3;
+    --btn-bg: #7a4aa3;
+    --btn-hover-bg: #613880;
 }
-
-.toppings:hover {
-    background-color: #613880;
-}
-
 .sauces {
-    background-color: #d9744a;
-}
-
-.sauces:hover {
-    background-color: #b35f3a;
+    --btn-bg: #d9744a;
+    --btn-hover-bg: #b35f3a;
 }
 
 /* Burger Display */
@@ -182,26 +168,13 @@ h4, h5, h6 {
 
 /* Styles for tablets */
 @media (min-width: 600px) {
-    body {
-        font-size: 18px;
-    }
-    h1 {
-        font-size: 28px;
-    }
-    h2 {
-        font-size:24px;
-    }
-    h3 {
-        font-size:22px;
-    }
-    h4, h5, h6 {
-        font-size:18px;
-    }
-    .text-sm{
-    font-size:16px;
-    }
-
-     /* rows & columns */
+    body { font-size: 18px; } 
+    h1 { font-size: 28px; } 
+    h2 { font-size: 24px; } 
+    h3 { font-size: 22px; } 
+    h4, h5, h6 { font-size: 18px; } 
+    .text-sm { font-size: 16px; } /* rows & columns */
+    
     [class*="col-"] {
         width: calc(100% / 12 * var(--tablet-span));
         display:inline-block;
@@ -210,24 +183,12 @@ h4, h5, h6 {
 
 /* Styles for desktops */
 @media (min-width: 1024px) {
-    body {
-        font-size: 20px;
-    }
-    h1 {
-        font-size: 32px;
-    }
-    h2 {
-        font-size:28px;
-    }
-    h3 {
-        font-size:24px;
-    }
-    h4, h5, h6 {
-        font-size:20px;
-    }
-    .text-sm{
-        font-size:18px;
-    }
+    body { font-size: 20px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 24px; }
+    h4, h5, h6 { font-size: 20px; }
+    .text-sm { font-size: 18px; }
     
     /* rows & columns */
 
