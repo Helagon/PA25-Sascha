@@ -60,25 +60,17 @@
         <p class="text-xs">&copy; <span id="year"></span> PA25 Sascha, Daten der Items: <a href="https://foodprint.org/" class="link">Foodprint</a></p>
     </footer>
 
+    <script src="functions.js"></script>
+
     <script>
-        // Funktion zum Laden der Zutaten aus JSON
-        function loadIngredients() {
-            fetch('ingredients.json')
-                .then(response => response.json())
-                .then(data => {
-                    const ingredients = array();
-                    for (const category in data) {
-                        data[category].forEach(ingredient => {
-                            ingredients.push(ingredient);
-                        });
-                    }
-                    return ingredients;
-                })
-                .catch(error => console.error('Fehler beim Laden der Zutaten:', error));
-        }
+        
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        const defaultIngredients = loadIngredients();
+
+        console.log('Lade Zutaten...', defaultIngredients);
+       
         // Zutaten laden und anzeigen
         fetch('ingredients.json')
             .then(response => response.json())
@@ -190,23 +182,7 @@
             .catch(error => console.error('Error loading ingredients:', error));
             
 
-            /*
-            Funktion zur Berechnung von CO2-Emissionen und Wasserverbrauch
-            */
-            function calculateCO2AndWater(ingredientName = '', ingredientCO2 = 0, ingredientWater = 0, currentTotalCO2 = 0, currentTotalWater = 0) {
-                // Berechnet neue Werte
-                const newTotalCO2 = currentTotalCO2 + ingredientCO2;
-                const newTotalWater = currentTotalWater + ingredientWater;
-
-                // Aktualisiere die Anzeige
-                document.getElementById('co2-emissions').textContent = newTotalCO2 + ' kg';
-                document.getElementById('water-usage').textContent = newTotalWater + ' l';
-
-                return {
-                    totalCO2: newTotalCO2,
-                    totalWater: newTotalWater
-                };
-            }  
+           
     </script>
 </body>
 </html>
