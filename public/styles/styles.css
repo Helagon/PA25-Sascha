@@ -1,4 +1,4 @@
-/* Base styles for mobile devices */
+/* Basisstile für Mobilgeräte */
 body {
     font-size: 16px;
     margin: 0;
@@ -9,7 +9,7 @@ body {
 .visible { display: block; }
 
 
-/* Styles for Headings */
+/* Stile für Überschriften */
 h1 {
     color: #4a772e;
     font-size: 24px;
@@ -33,6 +33,8 @@ h4, h5, h6 {
 /* Text */
 .text-sm { font-size: 14px; }
 .text-xs { font-size: 12px; }
+
+.link { color: #4a772e; text-decoration: none; }
 
 /* Tabelle */
 .table {
@@ -70,18 +72,7 @@ h4, h5, h6 {
     background-color: #3b5e23;
 }
 
-
-
-/* Zutaten-Buttons  
-.ingredient-btn {
-    color: #ffffff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 2px;
-}*/
-
+/* Zutatenpanel Basis + Farbmodifizierer */
 .ingredient-panel{
     max-height: 400px;
     overflow-y: auto;
@@ -93,42 +84,22 @@ h4, h5, h6 {
     color:white;
 }
 
-/* ingredient base + color modifiers */
-.ingredient-btn {
-    color: #ffffff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 2px;
-    background-color: var(--btn-bg, #4a772e);
-}
-.ingredient-btn:hover {
-    background-color: var(--btn-hover-bg, #3b5e23);
-}
+.patties { background-color: #ac4343; }
+.patties:hover { background-color: #8e3535; }
 
-.patties {
-    --btn-bg: #ac4343;
-    --btn-hover-bg: #8b3535;
-}
-.vegetables {
-    --btn-bg: #4a772e;
-    --btn-hover-bg: #3b5e23;
-}
-.breads {
-    --btn-bg: #d9a441;
-    --btn-hover-bg: #b78334;
-}
-.toppings {
-    --btn-bg: #7a4aa3;
-    --btn-hover-bg: #613880;
-}
-.sauces {
-    --btn-bg: #d9744a;
-    --btn-hover-bg: #b35f3a;
-}
+.vegetables { background-color: #4a772e; }
+.vegetables:hover { background-color: #3b5e23; }
 
-/* Burger Display */
+.breads { background-color: #d9a441; }
+.breads:hover { background-color: #b78334; }
+
+.toppings { background-color: #7a4aa3; }
+.toppings:hover { background-color: #613880; }
+
+.sauces { background-color: #d9744a; }
+.sauces:hover { background-color: #b85a38; }
+
+/* Burger-Anzeige */
 .burger-display {
     border: 2px dashed #4a772e;
     border-radius: 5px;
@@ -138,13 +109,13 @@ h4, h5, h6 {
     background-color: #f9f9f9;
 }
 
-/* Columns */
+/* Spalten */
 .row {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -10px;
 }
-/* Anzahl Spalten für unterschiedliche Desktop-Grössen definiert */
+/* Spaltenzahl für verschiedene Desktop-Größen */
 .col-1 { --desktop-span: 1; --tablet-span: 4;}
 .col-2 { --desktop-span: 2; --tablet-span: 4;}
 .col-3 { --desktop-span: 3; --tablet-span: 4;}
@@ -166,14 +137,14 @@ h4, h5, h6 {
 }
 
 
-/* Styles for tablets */
+/* Stile für Tablets */
 @media (min-width: 600px) {
     body { font-size: 18px; } 
     h1 { font-size: 28px; } 
     h2 { font-size: 24px; } 
     h3 { font-size: 22px; } 
     h4, h5, h6 { font-size: 18px; } 
-    .text-sm { font-size: 16px; } /* rows & columns */
+    .text-sm { font-size: 16px; }
     
     [class*="col-"] {
         width: calc(100% / 12 * var(--tablet-span));
@@ -181,7 +152,7 @@ h4, h5, h6 {
     }
 }
 
-/* Styles for desktops */
+/* Stile für Desktops */
 @media (min-width: 1024px) {
     body { font-size: 20px; }
     h1 { font-size: 32px; }
@@ -189,15 +160,9 @@ h4, h5, h6 {
     h3 { font-size: 24px; }
     h4, h5, h6 { font-size: 20px; }
     .text-sm { font-size: 18px; }
-    
-    /* rows & columns */
 
     [class*="col-"] {
         width: calc(100% / 12 * var(--desktop-span));
         display:inline-block;
     }
 }
-
-
-
-

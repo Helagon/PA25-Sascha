@@ -57,10 +57,25 @@
         </div>
     </main>
     <footer>
-        <p class="text-xs">&copy; <span id="year"></span> PA25 Sascha</p>
+        <p class="text-xs">&copy; <span id="year"></span> PA25 Sascha, Daten der Items: <a href="https://foodprint.org/" class="link">Foodprint</a></p>
     </footer>
 
     <script>
+        // Funktion zum Laden der Zutaten aus JSON
+        function loadIngredients() {
+            fetch('ingredients.json')
+                .then(response => response.json())
+                .then(data => {
+                    const ingredients = array();
+                    for (const category in data) {
+                        data[category].forEach(ingredient => {
+                            ingredients.push(ingredient);
+                        });
+                    }
+                    return ingredients;
+                })
+                .catch(error => console.error('Fehler beim Laden der Zutaten:', error));
+        }
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -191,7 +206,7 @@
                     totalCO2: newTotalCO2,
                     totalWater: newTotalWater
                 };
-            }
+            }  
     </script>
 </body>
 </html>
