@@ -19,9 +19,8 @@
     <main class="row">
         <div class="col-7" id="burger">
             <h4>Dein Burger:</h4>
-                
                 <div id="burger-display" class="burger-display dropZone">
-                <p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>
+                    <p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>
                 </div>
             <button id="reset-btn" class="btn">Zurücksetzen</button>
 
@@ -35,7 +34,7 @@
                 </tr>
                 </thead>
                 <tbody id="ingredient-table">
-
+                    <!-- Hier kommen die Zutaten hin und werden anschliessend berechnet-->
                 </tbody>
                 <tfoot>
                     <tr class="category-head">
@@ -61,131 +60,94 @@
     </footer>
 
     <script src="functions.js"></script>
-
     <script>
-        
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Standard Zutaten laden (WIP)
-        const defaultIngredients = loadIngredients();
-
         console.log('Lade Zutaten...');
-       
-        // Zutaten laden und anzeigen
-        fetch('ingredients.json')
-            .then(response => response.json())
-            .then(data => {
-                const ingredientsList = document.getElementById('ingredients-list');
-                const currentTotalCO2 = 0;
-                const currentTotalWater = 0;
 
-                // Kategorien durchlaufen
-                for (const category in data) {
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.className = 'ingredient-category col-6';
-                    categoryDiv.setAttribute('id', category + "_category");
-                    const categoryTitle = document.createElement('h5');
-                    const categoryItems = document.createElement('div');
-                    categoryItems.className = category + "_category";
-                    categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-                    categoryDiv.appendChild(categoryTitle);
+        const currentTotalCO2 = 0;
+        const currentTotalWater = 0;
 
-                    const categoryContent = Array();
+        // async init: lade Zutaten und initialisiere Drag&Drop
+        (async function initApp() {
+            try {
+                await loadIngredients();
 
-                    // Zutaten der Kategorie durchlaufen
-                    data[category].forEach(ingredient => {
-                        const ingredientPanel = createIngredientItems(ingredient);
-                        categoryDiv.appendChild(ingredientPanel);
-                        const item = Array(ingredient.name, ingredient.co2, ingredient.water, ingredient.icon, ingredient.category);    
-                        categoryContent.push(item);            
-                    });
-
-                    ingredientsList.appendChild(categoryDiv);
-                }
-
-                // Drag-and-Drop Funktionalität initiliaiseren, sobald die Items aus JSON geladen sind
-                // https://dev.to/lensco825/making-a-simple-drag-and-drop-with-js-29l2 --> Vorlage
-                const dragItems = document.querySelectorAll('.dragElement');
+                // bind existing items (createIngredientItems already binds per-item handlers)
                 const dropZone = document.querySelector('.dropZone');
 
+                function recalcTotalsFromDropzone() {
+                    const items = dropZone.querySelectorAll('.in-burger');
+                    let totalCO2 = 0;
+                    let totalWater = 0;
+                    $('#ingredient-table').empty();
+                    items.forEach(it => {
+                        const name = it.getAttribute('data-name') || it.textContent || '';
+                        const co2 = parseFloat(it.getAttribute('data-co2')) || 0;
+                        const water = parseFloat(it.getAttribute('data-water')) || 0;
+                        totalCO2 += co2;
+                        totalWater += water;
+                        $('#ingredient-table').append('<tr><td>' + name + '</td><td>' + water + ' l</td><td>' + co2 + ' kg</td></tr>');
+                    });
+                    $('#co2-emissions').text(totalCO2.toFixed(2) + ' kg');
+                    $('#water-usage').text(totalWater.toFixed(0) + ' l');
+                }
+
+                // expose for item click handlers
+                window.recalcTotalsFromDropzone = recalcTotalsFromDropzone;
+
+                // Drag & Drop-Events für Drop-Zone
+                // Inspo: https://dev.to/lensco825/making-a-simple-drag-and-drop-with-js-29l2
                 if (dropZone) {
-                    dropZone.addEventListener('dragover', (e) => {
-                        e.preventDefault();
-                    });
-
-                    dropZone.addEventListener('dragenter', () => {
-                        dropZone.classList.add('hoverover');
-                    });
-
-                    dropZone.addEventListener('dragleave', () => {
-                        dropZone.classList.remove('hoverover');
-                    });
-
-                    dropZone.addEventListener('drop', (e) => {
+                    dropZone.addEventListener('dragover', e => e.preventDefault());
+                    dropZone.addEventListener('dragenter', () => dropZone.classList.add('hoverover'));
+                    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('hoverover'));
+                    dropZone.addEventListener('drop', e => {
                         e.preventDefault();
                         const dragging = document.querySelector('.dragging');
-                        if (dragging) {
-                            dropZone.appendChild(dragging);
-                            dragging.classList.remove('dragging');
-                        }
-                        $('#ingredient-table').append('<tr><td>' + dragging.textContent + '</td><td>' + dragging.getAttribute('data-water') + ' l</td><td>' + dragging.getAttribute('data-co2') + ' kg</td></tr>');
+                        if (!dragging) return;
+                        dropZone.appendChild(dragging);
+                        dragging.classList.remove('dragging');
+                        dragging.classList.add('in-burger');
+
+                        const name = dragging.getAttribute('data-name') || dragging.textContent || '';
+                        const co2 = parseFloat(dragging.getAttribute('data-co2')) || 0;
+                        const water = parseFloat(dragging.getAttribute('data-water')) || 0;
+
+                        $('#ingredient-table').append('<tr><td>' + name + '</td><td>' + water + ' l</td><td>' + co2 + ' kg</td></tr>');
                         const currentTotalCO2 = parseFloat(document.getElementById('co2-emissions').textContent) || 0;
                         const currentTotalWater = parseFloat(document.getElementById('water-usage').textContent) || 0;
-                        const newValues = calculateCO2AndWater(
-                            dragging.textContent,
-                            parseFloat(dragging.getAttribute('data-co2')) || 0,
-                            parseFloat(dragging.getAttribute('data-water')) || 0,
-                            currentTotalCO2,
-                            currentTotalWater
-                        );
-
-                        
+                        calculateCO2AndWater(name, co2, water, currentTotalCO2, currentTotalWater);
                     });
                 }
 
-                dragItems.forEach(item => {
-                    item.addEventListener('dragstart', function() {
-                        this.classList.add('dragging');
-                    });
+                // Reset-Button: Bringt Ingredients zurück und leert Burger-Anzeige
+                $('#reset-btn').on('click', function () {
+                    const dropZone = document.querySelector('.dropZone');
+                    if (dropZone) {
+                        const inBurger = Array.from(dropZone.querySelectorAll('.in-burger'));
+                        inBurger.forEach(it => {
+                            it.classList.remove('in-burger');
+                            const cat = it.getAttribute('category');
+                            const container = document.getElementById(cat + '_category');
+                            if (container) container.appendChild(it);
+                        });
+                    }
 
-                    item.addEventListener('dragend', function() {
-                        this.classList.remove('dragging');
-                        this.classList.add('inList');
-                        
-                    });
-                    
-                });
-                
-                // Reset-Button
-                $('#reset-btn').on('click', function() {
-                    // Liste zurück in Zutatenbereich verschieben
-                    $('.inList').each(function() {
-                        const ingredient = {
-                            name : $(this).text().split(' ')[1],
-                            icon : $(this).text().split(' ')[0],
-                            co2 : $(this).attr('data-co2'),
-                            water : $(this).attr('data-water'),
-                            category : $(this).attr('category')
-                        };
-                        const ingredientPanel = createIngredientItems(ingredient);
-                        $("#"+$(this).attr('category')+"_category").append(ingredientPanel);
-                    });
-            
-                    
                     $('#burger-display').empty().append('<p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>');
-
-                    // CO2- und Wasserwerte zurücksetzen
                     $('#co2-emissions').text('0 kg');
                     $('#water-usage').text('0 l');
-
                     $('#ingredient-table').empty();
                 });
 
-            })
-            .catch(error => console.error('Error loading ingredients:', error));
+            } catch (err) {
+                console.error('Init error:', err);
+                const ingredientsList = document.getElementById('ingredients-list');
+                if (ingredientsList) ingredientsList.innerHTML = '<div class="error">Zutaten konnten nicht geladen werden.</div>';
+            }
+        })();
             
-
+        
            
     </script>
 </body>
