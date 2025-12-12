@@ -26,7 +26,7 @@ function loadIngredients() {
     
 }
 
-// Funktion für Items in den Kategorien
+// Funktion zur Einbettung der Zutaten in das HTML
 function createIngredientItems(data) {
     const ingredientPanel = document.createElement('div');
     ingredientPanel.className = 'ingredient-panel dragElement ' + data.category;
