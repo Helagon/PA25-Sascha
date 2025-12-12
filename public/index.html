@@ -67,9 +67,10 @@
         // aktuelles Jahr für Footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Standard Zutaten laden (WIP)
         const defaultIngredients = loadIngredients();
 
-        console.log('Lade Zutaten...', defaultIngredients);
+        console.log('Lade Zutaten...');
        
         // Zutaten laden und anzeigen
         fetch('ingredients.json')
@@ -83,6 +84,7 @@
                 for (const category in data) {
                     const categoryDiv = document.createElement('div');
                     categoryDiv.className = 'ingredient-category col-6';
+                    categoryDiv.setAttribute('id', category + "_category");
                     const categoryTitle = document.createElement('h5');
                     const categoryItems = document.createElement('div');
                     categoryItems.className = category + "_category";
@@ -93,12 +95,7 @@
 
                     // Zutaten der Kategorie durchlaufen
                     data[category].forEach(ingredient => {
-                        const ingredientPanel = document.createElement('div');
-                        ingredientPanel.className = 'ingredient-panel dragElement ' + category;
-                        ingredientPanel.setAttribute('draggable', 'true');
-                        ingredientPanel.setAttribute('data-co2', ingredient.co2);
-                        ingredientPanel.setAttribute('data-water', ingredient.water);
-                        ingredientPanel.textContent = (ingredient.icon || '') + ingredient.name;
+                        const ingredientPanel = createIngredientItems(ingredient);
                         categoryDiv.appendChild(ingredientPanel);
                         const item = Array(ingredient.name, ingredient.co2, ingredient.water, ingredient.icon, ingredient.category);    
                         categoryContent.push(item);            
@@ -154,26 +151,33 @@
 
                     item.addEventListener('dragend', function() {
                         this.classList.remove('dragging');
+                        this.classList.add('inList');
+                        
                     });
                     
                 });
                 
                 // Reset-Button
                 $('#reset-btn').on('click', function() {
+                    // Liste zurück in Zutatenbereich verschieben
+                    $('.inList').each(function() {
+                        const ingredient = {
+                            name : $(this).text().split(' ')[1],
+                            icon : $(this).text().split(' ')[0],
+                            co2 : $(this).attr('data-co2'),
+                            water : $(this).attr('data-water'),
+                            category : $(this).attr('category')
+                        };
+                        const ingredientPanel = createIngredientItems(ingredient);
+                        $("#"+$(this).attr('category')+"_category").append(ingredientPanel);
+                    });
+            
+                    
                     $('#burger-display').empty().append('<p class="text-sm" id="empty">Wähle zuerst deine Zutaten aus!</p>');
 
                     // CO2- und Wasserwerte zurücksetzen
                     $('#co2-emissions').text('0 kg');
                     $('#water-usage').text('0 l');
-
-                    // Liste zurück in Zutatenbereich verschieben
-                    dragItems.forEach(item => {
-                        const category = item.classList[2]; // Kategorie aus Klassenname extrahieren
-                        const categoryContainer = document.querySelector('.' + category + '_category');
-                        if (categoryContainer) {
-                            categoryContainer.appendChild(item);
-                        }
-                    });
 
                     $('#ingredient-table').empty();
                 });

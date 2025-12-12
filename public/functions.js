@@ -25,3 +25,16 @@ function loadIngredients() {
     .catch(error => console.error('Fehler beim Laden der Zutaten:', error));
     
 }
+
+// Funktion für Items in den Kategorien
+function createIngredientItems(data) {
+    const ingredientPanel = document.createElement('div');
+    ingredientPanel.className = 'ingredient-panel dragElement ' + data.category;
+    ingredientPanel.setAttribute('draggable', 'true');
+    ingredientPanel.setAttribute('data-co2', data.co2);
+    ingredientPanel.setAttribute('data-water', data.water);
+    ingredientPanel.setAttribute('category', data.category);
+    ingredientPanel.textContent = data.icon + " " + data.name;
+
+    return ingredientPanel;
+}
