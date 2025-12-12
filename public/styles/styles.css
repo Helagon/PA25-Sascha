@@ -1,0 +1,168 @@
+/* Basisstile für Mobilgeräte */
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 10px;
+}
+
+.hidden { display: none; }
+.visible { display: block; }
+
+
+/* Stile für Überschriften */
+h1 {
+    color: #4a772e;
+    font-size: 24px;
+    font-weight: bold;
+}
+h2 {
+    color: #000000;
+    font-size:22px;
+    font-weight: bold;
+}
+h3 {
+    color: #000000;
+    font-size:20px;
+    font-weight: bold;
+}
+h4, h5, h6 {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Text */
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
+
+.link { color: #4a772e; text-decoration: none; }
+
+/* Tabelle */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #1e3b20;
+    color:white;
+}
+
+.table .category-head{
+    background-color: #4a772e;
+    color: white;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    background-color: #4a772e;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #3b5e23;
+}
+
+/* Zutatenpanel Basis + Farbmodifizierer */
+.ingredient-panel{
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding:10px;
+    text-align: center;;
+    color:white;
+}
+
+.patties { background-color: #ac4343; }
+.patties:hover { background-color: #8e3535; }
+
+.vegetables { background-color: #4a772e; }
+.vegetables:hover { background-color: #3b5e23; }
+
+.breads { background-color: #d9a441; }
+.breads:hover { background-color: #b78334; }
+
+.toppings { background-color: #7a4aa3; }
+.toppings:hover { background-color: #613880; }
+
+.sauces { background-color: #d9744a; }
+.sauces:hover { background-color: #b85a38; }
+
+/* Burger-Anzeige */
+.burger-display {
+    border: 2px dashed #4a772e;
+    border-radius: 5px;
+    min-height: 200px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Spalten */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+/* Spaltenzahl für verschiedene Desktop-Größen */
+.col-1 { --desktop-span: 1; --tablet-span: 4;}
+.col-2 { --desktop-span: 2; --tablet-span: 4;}
+.col-3 { --desktop-span: 3; --tablet-span: 4;}
+.col-4 { --desktop-span: 4; --tablet-span: 6;}
+.col-5 { --desktop-span: 5; --tablet-span: 6;}
+.col-6 { --desktop-span: 6; --tablet-span: 6;}
+.col-7 { --desktop-span: 7; --tablet-span: 8;}
+.col-8 { --desktop-span: 8; --tablet-span: 8;}
+.col-9 { --desktop-span: 9; --tablet-span: 8;}
+.col-10 { --desktop-span: 10; --tablet-span: 12;}
+.col-11 { --desktop-span: 11; --tablet-span: 12;}
+.col-12 { --desktop-span: 12; --tablet-span: 12;}
+
+[class*="col-"] {
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+/* Stile für Tablets */
+@media (min-width: 600px) {
+    body { font-size: 18px; } 
+    h1 { font-size: 28px; } 
+    h2 { font-size: 24px; } 
+    h3 { font-size: 22px; } 
+    h4, h5, h6 { font-size: 18px; } 
+    .text-sm { font-size: 16px; }
+    
+    [class*="col-"] {
+        width: calc(100% / 12 * var(--tablet-span));
+        display:inline-block;
+    }
+}
+
+/* Stile für Desktops */
+@media (min-width: 1024px) {
+    body { font-size: 20px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 24px; }
+    h4, h5, h6 { font-size: 20px; }
+    .text-sm { font-size: 18px; }
+
+    [class*="col-"] {
+        width: calc(100% / 12 * var(--desktop-span));
+        display:inline-block;
+    }
+}

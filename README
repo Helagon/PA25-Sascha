@@ -1,35 +1,62 @@
-# Projekt Applikation
+# Burger-Konfigurator mit Umwelt-Impact
 
-Dies ist eine Applikation im Rahmen des Projekts **PA25-Sascha**.
+Dies ist eine Web-Applikation im Rahmen des Projekts **PA25-Sascha**, die es ermöglicht, Burger zu konfigurieren und dabei den Umwelteinfluss der gewählten Zutaten zu visualisieren.
 
 ## Übersicht
 
-Beschreiben Sie hier kurz den Zweck und die Hauptfunktionen der Applikation.
+Die Applikation bietet folgende Hauptfunktionen:
+- Interaktive Burger-Konfiguration mit verschiedenen Zutaten
+- Berechnung des CO2-Fußabdrucks der gewählten Zutaten
+- Anzeige des Wasserverbrauchs für die Produktion der Zutaten
+- Übersichtliche Kategorisierung der Zutaten (Proteine, Gemüse, Brote)
+- Responsives Design für optimale Nutzung auf allen Geräten
 
 ## Installation
 
 1. Repository klonen:
     ```
-    git clone <repository-url>
+    git clone https://github.com/Helagon/PA25-Sascha.git
     ```
 2. In das Projektverzeichnis wechseln:
     ```
     cd PA25-Sascha
     ```
-3. Abhängigkeiten installieren (falls notwendig):
+3. Abhängigkeiten installieren:
     ```
-    # Beispiel für Node.js
     npm install
     ```
 
 ## Nutzung
 
-Beschreiben Sie hier, wie die Applikation gestartet und verwendet wird.
+1. Starten Sie den lokalen Entwicklungsserver:
+    ```
+    npm start
+    ```
+2. Öffnen Sie die Anwendung in Ihrem Browser unter:
+    ```
+    http://localhost:3000
+    ```
+3. Wähle deine gewünschten Zutaten aus den verschiedenen Kategorien:
+   - Proteine (Rindfleisch, Schweinefleisch, Hühnchen)
+   - Gemüse (Salat, Tomaten, Zwiebeln, Gurken)
+   - Brötchen (Weizen, Vollkorn)
+   ...
+
+Die Umweltauswirkungen werden in Echtzeit berechnet und angezeigt.
+
+## Technische Details
+
+- Frontend: HTML5, CSS3, JavaScript
+- Responsive Design mit Media Queries
+- JSON-basierte Zutatendatenbank
+- Echtzeit-Berechnung von Umweltauswirkungen
 
 ## Lizenz
 
-Dieses Projekt steht unter folgender Lizenz: [Lizenzname].
+Dieses Projekt steht unter der MIT-Lizenz.
 
 ## Autor
 
 - Sascha Jaeger
+- Projekt im Rahmen der Ausbildung
+- Version: 1.0
